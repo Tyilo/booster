@@ -600,16 +600,12 @@ func boost() error {
 	}
 
 	if config.EnableLVM {
-		vgscan := exec.Command("vgscan", "-v")
-		vgscan.Stdout = os.Stdout
-		vgscan.Stderr = os.Stderr
+		vgscan := exec.Command("vgscan")
 		if err := vgscan.Run(); err != nil {
 			return err
 		}
 
-		vgchange := exec.Command("vgchange", "-ay", "-v")
-		vgchange.Stdout = os.Stdout
-		vgchange.Stderr = os.Stderr
+		vgchange := exec.Command("vgchange", "-ay")
 		if err := vgchange.Run(); err != nil {
 			return err
 		}
